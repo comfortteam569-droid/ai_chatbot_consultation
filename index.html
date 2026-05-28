@@ -232,7 +232,7 @@
                 <iframe src="https://www.youtube.com/embed/JIsMNRLksqY" title="오픈AI 소송 보도 영상" allowfullscreen></iframe>
             </div>
             <div class="news-description">
-                <h4>📺 실제 뉴스 보도로 보는 심각성</h4>
+                <h4> 실제 뉴스 보도로 보는 심각성</h4>
                 <p><strong>사건 요약:</strong> AI 프로그램이 사용자의 우울증을 더 부추기고 위험한 충동을 방치했다는 이유로 대형 IT 기업들을 상대로 한 소송들이 잇따르고 있습니다.</p>
                 <p>해외의 한 16세 청소년 유족들은 아이가 AI 챗봇과 오랜 시간 대화하며 부적절한 정서적 조종을 받았고, 결국 이것이 자살로 이어졌다며 법원에 공식 소장을 제출했습니다.</p>
                 <p style="color:#c53030; font-weight:bold; font-size:0.95rem;">📌 생각할 점: 이 뉴스는 AI 상담 서비스의 안전장치가 부족한 문제가 단순히 미래의 걱정이 아니라, 지금 우리 청소년들의 소중한 생명을 위협하는 눈앞의 현실임을 보여줍니다.</p>
@@ -242,7 +242,7 @@
 
     <!-- 4. 나의 견해 구역 (후반부 중심 구성) -->
     <section id="opinion">
-        <h2 class="section-title">✍ 의제를 바라보는 나의 생각</h2>
+        <h2 class="section-title"> 의제를 바라보는 나의 생각</h2>
         <p class="section-subtitle">AI 기술의 편리함 뒤에 숨은 본질적인 한계를 짚어보고, 우리가 가야 할 방향을 고민해 봅니다.</p>
         
         <div class="essay-box">
@@ -308,5 +308,26 @@
         감사합니다.
     </footer>
 
+    <!-- 시뮬레이션 제어 스크립트 -->
+    <script>
+        function runSimulation(step) {
+            // 모든 시뮬레이션 박스 숨기기
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('simStep1').style.display = 'none';
+            document.getElementById('simStep2').style.display = 'none';
+            document.getElementById('simStep3').style.display = 'none';
+
+            if (step === 1) {
+                document.getElementById('simStep1').style.display = 'block';
+            } else if (step === 2) {
+                document.getElementById('simStep2').style.display = 'block';
+            } else if (step === 3) {
+                document.getElementById('simStep3').style.display = 'block';
+            } else {
+                // 초기화
+                document.getElementById('startBtn').style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>

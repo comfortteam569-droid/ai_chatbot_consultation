@@ -12,7 +12,7 @@
         a { color: #3182ce; text-decoration: none; font-weight: bold; }
         a:hover { text-decoration: underline; }
 
-        /* 1. 첫 화면: 대문 페이지 (독자의 관심을 끄는 화면) */
+        /* 1. 첫 화면: 대문 페이지 (시각적 임팩트 중심) */
         .intro-hero {
             height: 100vh;
             background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
@@ -23,7 +23,6 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
-            position: relative;
         }
         .intro-hero .badge { background: #3182ce; color: #fff; font-size: 0.9rem; font-weight: 600; padding: 6px 16px; border-radius: 50px; margin-bottom: 20px; }
         .intro-hero h1 { font-size: 3.2rem; margin-bottom: 25px; word-break: keep-all; font-weight: 800; text-shadow: 2px 4px 10px rgba(0,0,0,0.4); }
@@ -39,16 +38,26 @@
 
         /* 공통 구역 설정 */
         section { max-width: 1050px; margin: 100px auto; padding: 50px 40px; background: #ffffff; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; }
-        .section-title { font-size: 2.2rem; color: #1a202c; margin-bottom: 20px; text-align: center; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .section-title { font-size: 2.2rem; color: #1a202c; margin-bottom: 20px; text-align: center; font-weight: 800; }
         .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: #3182ce; margin: 12px auto 0; border-radius: 2px; }
         .section-subtitle { text-align: center; color: #718096; margin-bottom: 40px; font-size: 1.05rem; word-break: keep-all; }
 
-        /* 2. 문제 배경: 카드 형식 구성 (핵심 문장을 나누어 보여줌) */
-        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px; }
-        .content-card { background: #f8fafc; border-radius: 16px; padding: 35px; border-top: 4px solid #3182ce; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.01); }
-        .content-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px rgba(0,0,0,0.06); background: #fff; }
-        .content-card h3 { font-size: 1.35rem; margin-bottom: 15px; color: #2b6cb0; display: flex; align-items: center; gap: 8px; }
-        .content-card p { font-size: 1rem; color: #4a5568; text-align: justify; word-break: keep-all; }
+        /* 💡 [신규] 글을 숨겨주는 더 알아보기 접이식(토글) 공통 스타일 */
+        .more-info-details { margin-top: 15px; background: #f8fafc; border: 1px dashed #cbd5e0; border-radius: 12px; padding: 20px; text-align: justify; }
+        .more-info-summary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #edf2f7; color: #4a5568; padding: 10px 20px; border-radius: 50px; font-size: 0.95rem; font-weight: bold; cursor: pointer; transition: all 0.2s; border: 1px solid #e2e8f0; list-style: none; user-select: none; margin: 10px auto 0; }
+        .more-info-summary:hover { background: #e2e8f0; color: #1a202c; }
+        .more-info-summary::-webkit-details-marker { display: none; } /* 화살표 제거 */
+
+        /* 2. 문제 배경: 3컷 웹툰 일러스트형 레이아웃 */
+        .webtoon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .webtoon-cut { background: #fff; border: 3px solid #1a202c; border-radius: 16px; overflow: hidden; box-shadow: 8px 8px 0px #1a202c; display: flex; flex-direction: column; }
+        .webtoon-img-sim { height: 160px; background: #e2e8f0; display: flex; justify-content: center; align-items: center; font-size: 3.5rem; border-bottom: 3px solid #1a202c; position: relative; }
+        .webtoon-cut:nth-child(1) .webtoon-img-sim { background: #ebf8ff; }
+        .webtoon-cut:nth-child(2) .webtoon-img-sim { background: #feebc8; }
+        .webtoon-cut:nth-child(3) .webtoon-img-sim { background: #e2e8f0; }
+        .webtoon-badge { position: absolute; top: 10px; left: 10px; background: #1a202c; color: #fff; font-size: 0.75rem; font-weight: bold; padding: 4px 10px; border-radius: 4px; }
+        .webtoon-desc { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; text-align: center; }
+        .webtoon-desc h3 { font-size: 1.2rem; font-weight: 800; color: #1a202c; margin-bottom: 10px; }
 
         /* 인공지능 대화 창 */
         .chatgpt-container { max-width: 650px; margin: 50px auto 0; background: #202123; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 30px rgba(0,0,0,0.15); }
@@ -63,13 +72,18 @@
         .chat-text { color: #ececf1; font-size: 0.95rem; word-break: keep-all; line-height: 1.6; text-align: justify; }
         .chat-warning { background: #fff5f5; border: 1px solid #feb2b2; padding: 20px; border-radius: 12px; color: #c53030; font-size: 0.95rem; margin: 25px auto 0; max-width: 650px; display: flex; align-items: flex-start; gap: 12px; }
 
-        /* 3. 자료 비교 분석 표 (시각적 비교를 극대화) */
-        .table-scroll { overflow-x: auto; margin-top: 20px; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
-        table { width: 100%; border-collapse: collapse; background: #fff; text-align: left; min-width: 900px; }
-        th, td { padding: 22px 20px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
-        th { background-color: #2b6cb0; color: white; font-weight: 700; font-size: 1.05rem; }
-        tr:hover { background-color: #f8fafc; }
-        .link-badge { display: inline-flex; align-items: center; gap: 4px; margin-top: 12px; background: #ebf8ff; color: #2b6cb0; padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; }
+        /* 3. 자료 비교 분석: 인포그래픽 카드형 구조 */
+        .info-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .info-analytic-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s; }
+        .info-analytic-card:hover { transform: translateY(-5px); }
+        .card-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .media-tag { padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; }
+        .media-tag.news { background: #e2e8f0; color: #4a5568; }
+        .media-tag.law { background: #feebc8; color: #c05621; }
+        .media-tag.paper { background: #ebf8ff; color: #2b6cb0; }
+        .analytic-title { font-size: 1.25rem; font-weight: 800; color: #1a202c; margin-bottom: 15px; }
+        .highlight-point { background: #f8fafc; border-left: 4px solid #3182ce; padding: 10px 15px; font-size: 0.95rem; font-weight: 700; color: #2d3748; margin-bottom: 10px; }
+        .critique-point { background: #fff5f5; border-left: 4px solid #e53e3e; padding: 10px 15px; font-size: 0.95rem; font-weight: 700; color: #c53030; }
 
         /* 영상 및 뉴스 설명 2단 구성 */
         .video-news-section { display: grid; grid-template-columns: 1.2fr 1fr; gap: 35px; margin-top: 50px; padding-top: 40px; border-top: 2px dashed #e2e8f0; }
@@ -79,11 +93,11 @@
         .news-description h4 { font-size: 1.3rem; color: #1a202c; margin-bottom: 15px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
         .news-description p { font-size: 0.95rem; color: #4a5568; margin-bottom: 12px; text-align: justify; word-break: keep-all; }
 
-        /* 4. 나의 견해 상자 */
-        .essay-box { background: #fffaf0; border-left: 6px solid #dd6b20; padding: 45px; border-radius: 8px 24px 24px 8px; }
-        .essay-box p { font-size: 1.15rem; color: #2d3748; margin-bottom: 22px; text-align: justify; word-break: keep-all; }
-        .essay-box p:last-child { margin-bottom: 0; }
-        .marker { background: linear-gradient(to top, #feebc8 45%, transparent 45%); font-weight: 700; color: #c05621; }
+        /* 4. 나의 견해: 말풍선 요약 인포그래픽 */
+        .opinion-visual-container { display: flex; flex-direction: column; gap: 20px; background: #fffaf0; padding: 35px; border-radius: 20px; border: 1px solid #feebc8; }
+        .opinion-bubble-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 4px 6px rgba(194,120,3,0.05); border: 1px solid #fde8bb; position: relative; }
+        .opinion-bubble-card::before { content: '💡'; font-size: 1.2rem; margin-right: 8px; }
+        .opinion-bubble-text { font-size: 1.1rem; font-weight: 700; color: #c05621; display: inline; }
 
         /* 5. 최종 제안 단계별 구성 (도식화 및 그림 요소) */
         .flow-layout { display: flex; flex-direction: column; gap: 40px; margin-top: 45px; position: relative; }
@@ -93,7 +107,7 @@
         .flow-text h4 { font-size: 1.3rem; color: #1a202c; margin-bottom: 12px; font-weight: 700; }
         .flow-text p { color: #4a5568; font-size: 1.05rem; text-align: justify; word-break: keep-all; }
         
-        /* [추가] 동의 기반 위기 대화 요약 카드 시각화 UI */
+        /* 동의 기반 위기 대화 요약 카드 시각화 UI */
         .summary-card-visual { background: #ffffff; border: 2px dashed #cbd5e0; border-radius: 12px; padding: 20px; margin-top: 15px; max-width: 550px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
         .summary-card-header { font-weight: bold; color: #2c5282; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 12px; font-size: 0.95rem; display: flex; justify-content: space-between; }
         .summary-card-body { font-size: 0.9rem; color: #4a5568; display: flex; flex-direction: column; gap: 6px; }
@@ -103,7 +117,7 @@
             content: '↓'; position: absolute; left: 58px; bottom: -32px; font-size: 1.8rem; color: #3182ce; font-weight: 900; z-index: 10;
         }
 
-        /* 🛠️ [필요 코드 삽입 1] 시뮬레이션 기능 작동을 위한 핵심 CSS */
+        /* 시뮬레이션 기능 작동을 위한 CSS */
         .sim-container { background: #edf2f7; border: 2px solid #cbd5e0; border-radius: 20px; padding: 35px; margin-top: 50px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.02); }
         .sim-screen { background: #ffffff; border-radius: 12px; padding: 25px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-top: 15px; border: 1px solid #e2e8f0; }
         .sim-btn { background: #3182ce; color: white; border: none; padding: 14px 30px; font-size: 1.05rem; font-weight: bold; border-radius: 50px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 10px rgba(49,130,206,0.3); }
@@ -121,32 +135,60 @@
 </head>
 <body>
 
+    <!-- 1. 첫 화면: 대문 페이지 -->
     <header class="intro-hero">
         <span class="badge">소통과 기술의 사회적 고민</span>
         <h1>AI 챗봇은 청소년의 고민을<br>어디까지 들어줘도 될까?</h1>
         <p>부제: 청소년 AI 상담 챗봇의 위기상황 대응 기준과 전문상담 연결 체계 부족</p>
-        <button class="scroll-btn" onclick="document.getElementById('background').scrollIntoView();">👇 아래로 내려서 내용 차례대로 읽기</button>
+        <button class="scroll-btn" onclick="document.getElementById('background').scrollIntoView();">👇 아래로 내려서 한눈에 이해하기</button>
     </header>
 
+    <!-- 2. 문제 배경 구역 (텍스트 대신 3컷 웹툰 레이아웃 구조로 전면 개편) -->
     <section id="background">
         <h2 class="section-title">🔍 우리가 이 문제에 관심을 가져야 하는 이유</h2>
-        <p class="section-subtitle">인공지능을 대하는 청소년들의 새로운 소통 방식과 그 속에 숨은 위험성을 알아봅니다.</p>
+        <p class="section-subtitle">아래의 핵심 상황을 확인해보세요. 각 상황의 자세한 설명은 버튼을 누르면 나타납니다.</p>
         
-        <div class="grid-cards">
-            <div class="content-card">
-                <h3>💬 고민을 털어놓는 대화 상대</h3>
-                <p>요즘 많은 청소년들은 AI 챗봇을 궁금한 걸 찾아주는 단순한 검색 도구가 아니라, 아무에게도 말하지 못했던 속마음을 편하게 털어놓는 친근한 말동무처럼 생각하고 사용합니다.</p>
+        <!-- 🎨 웹툰 형태의 시각적 그리드 배치 -->
+        <div class="webtoon-grid">
+            <div class="webtoon-cut">
+                <div class="webtoon-img-sim"><span class="webtoon-badge">CUT 1</span>💬📱</div>
+                <div class="webtoon-desc">
+                    <h3>고민을 털어놓는 대화 상대</h3>
+                    <details class="more-info-root">
+                        <summary class="more-info-summary">🔍 상황 자세히 보기</summary>
+                        <div class="more-info-details">
+                            요즘 많은 청소년들은 AI 챗봇을 궁금한 걸 찾아주는 단순한 검색 도구가 아니라, 아무에게도 말하지 못했던 속마음을 편하게 털어놓는 친근한 말동무처럼 생각하고 사용합니다.
+                        </div>
+                    </details>
+                </div>
             </div>
-            <div class="content-card">
-                <h3>❤️ 개인적 조언과 정서적 지지</h3>
-                <p>스마트폰만 있으면 언제 어디서든 바로 대답해 주다 보니, 외로움을 느끼거나 마음이 힘들 때 AI 챗봇을 나만을 위한 고민 상담사이자 든든하게 마음을 채워주는 존재로 의지하곤 합니다.</p>
+            <div class="webtoon-cut">
+                <div class="webtoon-img-sim"><span class="webtoon-badge">CUT 2</span>❤️🤖</div>
+                <div class="webtoon-desc">
+                    <h3>개인적 조언과 정서적 지지</h3>
+                    <details class="more-info-root">
+                        <summary class="more-info-summary">🔍 상황 자세히 보기</summary>
+                        <div class="more-info-details">
+                            스마트폰만 있으면 언제 어디서든 바로 대답해 주다 보니, 외로움을 느끼거나 마음이 힘들 때 AI 챗봇을 나만을 위한 고민 상담사이자 든든하게 마음을 채워주는 존재로 의지하곤 합니다.
+                        </div>
+                    </details>
+                </div>
             </div>
-            <div class="content-card">
-                <h3>🧩 복잡하게 얽힌 사회적 숙제</h3>
-                <p>이 문제는 기술적인 부분뿐만 아니라 청소년의 정신건강, AI 기업을 규제할 수 있는 법과 제도, 그리고 현장의 전문 상담 센터가 모두 긴밀하게 함께 고민하고 풀어내야 하는 복잡한 숙제입니다.</p>
+            <div class="webtoon-cut">
+                <div class="webtoon-img-sim"><span class="webtoon-badge">CUT 3</span>🧩🏫</div>
+                <div class="webtoon-desc">
+                    <h3>복잡하게 얽힌 사회적 숙제</h3>
+                    <details class="more-info-root">
+                        <summary class="more-info-summary">🔍 상황 자세히 보기</summary>
+                        <div class="more-info-details">
+                            이 문제는 기술적인 부분뿐만 아니라 청소년의 정신건강, AI 기업을 규제할 수 있는 법과 제도, 그리고 현장의 전문 상담 센터가 모두 긴밀하게 함께 고민하고 풀어내야 하는 복잡한 숙제입니다.
+                        </div>
+                    </details>
+                </div>
             </div>
         </div>
 
+        <!-- 챗GPT 화면 재현 구역 (시각적 대화 모형) -->
         <div class="chatgpt-container">
             <div class="chatgpt-header">
                 <span>인공지능과의 실제 대화 사례</span>
@@ -169,71 +211,69 @@
         </div>
     </section>
 
+    <!-- 3. 자료 비교 분석 구역 (인포그래픽 카드 배열 및 장문 숨김 기능) -->
     <section id="comparison">
         <h2 class="section-title">📊 여러 자료를 통해 본 관점 비교</h2>
-        <p class="section-subtitle">뉴스, 법안, 논문이라는 서로 다른 성격의 자료들이 이 문제를 어떻게 바라보고 있는지 꼼꼼하게 대조해 보았습니다.</p>
+        <p class="section-subtitle">각 매체별로 강조하는 핵심 포인트와 한계점을 시각 카드로 요약했습니다. 상세 내용은 버튼을 클릭해 확인하세요.</p>
         
-        <div class="table-scroll">
-            <table>
-                <thead>
-                    <tr>
-                        <th>매체 종류 및 출처</th>
-                        <th>핵심 내용</th>
-                        <th>강조하는 부분</th>
-                        <th>부족하게 다룬 관점 (비판적 시선)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <strong>📰 뉴스 매체</strong><br>
-                            (AP News 기사)<br>
-                            <a href="https://apnews.com" target="_blank" class="link-badge">🔗 뉴스 원문 확인</a>
-                        </td>
-                        <td>
-                            미국 정부 기관이 정보통신 기업들을 대상으로, 청소년들이 AI 때문에 겪은 정서적 피해와 챗봇의 안전장치 실태를 조사하기 시작했다는 사실을 다룹니다.
-                        </td>
-                        <td>
-                            사건이 사회적으로 준 충격과 실제 피해 사례를 생생하게 전달하며 정부가 왜 강력한 규제에 나섰는지 강조합니다.
-                        </td>
-                        <td>
-                            학교 현장의 선생님들이나 청소년들이 일상에서 진짜로 필요로 하는 현실적인 대안이나 목소리는 깊이 있게 다루지 못했습니다.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>📜 법안 자료</strong><br>
-                            (California SB 243)
-                        </td>
-                        <td>
-                            미성년자가 AI 서비스를 쓸 때 인공지능과 대화하고 있음을 명확히 알리게 하고, 과도한 몰입 방지용 휴식 권고 및 위험 대화 차단 기능을 법으로 의무화하는 내용입니다.
-                        </td>
-                        <td>
-                            법적인 강제력을 통해 AI 기술 기업들이 청소년을 보호하는 안전장치를 반드시 만들도록 사회적 책임을 강하게 묻습니다.
-                        </td>
-                        <td>
-                            법률 문서의 특성상, 아이들이 왜 실제 사람과의 상담을 피하고 AI 화면 속으로 숨어드는지에 대한 근본적인 심리 분석은 빠져 있습니다.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>🔬 학술자료 (논문)</strong><br>
-                            (JIMIR Mental Health 논문)
-                        </td>
-                        <td>
-                            자해나 심각한 위기 상황을 가정해 여러 AI 서비스에 대화를 시도해 본 결과, 챗봇들이 위험한 이야기를 걸러내지 못하고 동조하는 심각한 기술적 결함이 있음을 증명했습니다.
-                        </td>
-                        <td>
-                            정신건강학 관점에서 객관적이고 과학적인 데이터를 바탕으로, 현재 AI 답변이 가진 실질적인 위험성과 기술적 한계를 경고합니다.
-                        </td>
-                        <td>
-                            연구실 밖의 현실 세계에서 아이들을 도울 수 있는 학교 상담실이나 공공 상담 센터와의 구체적인 연계 방식은 제안하지 못했습니다.
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="info-card-grid">
+            <!-- 뉴스 카드 -->
+            <div class="info-analytic-card">
+                <div>
+                    <div class="card-meta">
+                        <span class="media-tag news">📰 뉴스 매체</span>
+                        <a href="https://apnews.com" target="_blank" style="font-size:0.85rem;">원문 🔗</a>
+                    </div>
+                    <div class="analytic-title">AP News 기사</div>
+                    <div class="highlight-point">📢 미 정부, 청소년 AI 정서 피해 조사 착수</div>
+                    <div class="critique-point">❌ 현장 교사 및 청소년의 현실적 목소리 부족</div>
+                </div>
+                <details class="more-info-root">
+                    <summary class="more-info-summary">📄 상세 분석 자료 보기</summary>
+                    <div class="more-info-details">
+                        미국 정부 기관이 정보통신 기업들을 대상으로, 청소년들이 AI 때문에 겪은 정서적 피해와 챗봇의 안전장치 실태를 조사하기 시작했다는 사실을 다룹니다. 사건이 사회적으로 준 충격과 실제 피해 사례를 생생하게 전달하며 정부가 왜 강력한 규제에 나섰는지 강조하지만, 학교 현장의 선생님들이나 청소년들이 일상에서 진짜로 필요로 하는 현실적인 대안은 깊이 있게 다루지 못했습니다.
+                    </div>
+                </details>
+            </div>
+
+            <!-- 법안 카드 -->
+            <div class="info-analytic-card">
+                <div>
+                    <div class="card-meta">
+                        <span class="media-tag law">📜 법안 자료</span>
+                    </div>
+                    <div class="analytic-title">California SB 243</div>
+                    <div class="highlight-point">⚖️ AI 대화 고지 및 과몰입 방지 의무화</div>
+                    <div class="critique-point">❌ 청소년이 AI에 숨어드는 심리적 분석 결여</div>
+                </div>
+                <details class="more-info-root">
+                    <summary class="more-info-summary">📄 상세 분석 자료 보기</summary>
+                    <div class="more-info-details">
+                        미성년자가 AI 서비스를 쓸 때 인공지능과 대화하고 있음을 명확히 알리게 하고, 과도한 몰입 방지용 휴식 권고 및 위험 대화 차단 기능을 법으로 의무화하는 내용입니다. 법적인 강제력을 통해 AI 기술 기업들이 청소년을 보호하는 안전장치를 반드시 만들도록 사회적 책임을 강하게 묻지만, 법률 문서의 특성상 아이들이 왜 실제 사람과의 상담을 피하고 AI 화면 속으로 숨어드는지에 대한 근본적인 심리 분석은 빠져 있습니다.
+                    </div>
+                </details>
+            </div>
+
+            <!-- 논문 카드 -->
+            <div class="info-analytic-card">
+                <div>
+                    <div class="card-meta">
+                        <span class="media-tag paper">🔬 학술자료</span>
+                    </div>
+                    <div class="analytic-title">JMIR Mental Health 논문</div>
+                    <div class="highlight-point">🧪 실험을 통한 AI 위험 대화 동조 한계 증명</div>
+                    <div class="critique-point">❌ 학교 상담실 등 실질적 연계 시스템 미제시</div>
+                </div>
+                <details class="more-info-root">
+                    <summary class="more-info-summary">📄 상세 분석 자료 보기</summary>
+                    <div class="more-info-details">
+                        자해나 심각한 위기 상황을 가정해 여러 AI 서비스에 대화를 시도해 본 결과, 챗봇들이 위험한 이야기를 걸러내지 못하고 동조하는 심각한 기술적 결함이 있음을 증명했습니다. 정신건강학 관점에서 객관적이고 과학적인 데이터를 바탕으로 현재 AI 답변이 가진 실질적인 위험성과 기술적 한계를 경고하지만, 연구실 밖의 현실 세계에서 아이들을 도울 수 있는 학교 상담실이나 공공 상담 센터와의 구체적인 연계 방식은 제안하지 못했습니다.
+                    </div>
+                </details>
+            </div>
         </div>
 
+        <!-- 뉴스 영상 및 설명 배치 구역 -->
         <div class="video-news-section">
             <div class="video-box">
                 <iframe src="https://www.youtube.com/embed/JIsMNRLksqY" title="오픈AI 소송 보도 영상" allowfullscreen></iframe>
@@ -247,33 +287,52 @@
         </div>
     </section>
 
+    <!-- 4. 나의 견해 구역 (핵심 키워드 시각화 및 본문 숨김 처리) -->
     <section id="opinion">
         <h2 class="section-title"> 의제를 바라보는 나의 생각</h2>
-        <p class="section-subtitle">AI 기술의 편리함 뒤에 숨은 본질적인 한계를 짚어보고, 우리가 가야 할 방향을 고민해 봅니다.</p>
+        <p class="section-subtitle">나의 핵심 주장을 말풍선 아이콘 형태로 시각화했습니다. 논리적인 전체 생각은 아래 버튼을 눌러 읽어보세요.</p>
         
-        <div class="essay-box">
-            <p>
-                우리는 흔히 AI가 더 똑똑해지고 사람처럼 자연스럽게 대화할 수 있게 되면 청소년들의 외로움을 달래줄 좋은 친구나 완벽한 상담사가 될 수 있을 거라고 기대합니다. 하지만 저는 아무리 뛰어난 기술이라 하더라도, 사람의 생명과 마음 건강이 걸린 절체절명의 위기 상황까지 AI가 온전히 책임질 수는 없다고 생각합니다. 컴퓨터 코드로 움직이는 챗봇은 문맥상 가장 그럴싸한 단어 조합을 계산해서 보여줄 뿐, 우리가 느끼는 깊은 절망이나 말문 뒤에 숨겨진 차가운 우울의 마음을 결코 가슴으로 이해할 수 없기 때문입니다.
-            </p>
-            <p>
-                만약 진짜 심각한 위기에 처한 학생이 챗봇에게 마지막 구조 신호(SOS)를 보냈을 때, 기술이 그저 기계적인 응원 한마디나 "산책을 해보라"는 평범한 조언만 늘어놓는다면 그건 진정한 위로가 아닙니다. 오히려 전문가를 만나 제대로 치료받을 기회를 가로막고, 화면 속 가상 세계로 아이를 더 고립시켜 방치하는 결과를 낳을 수 있습니다. 결국 기술이 채우지 못하는 차가운 빈틈을 메우고 아이들의 다친 상처를 따뜻하게 안아줄 수 있는 존재는 실제 온기를 가진 인간 전문가뿐입니다.
-            </p>
-            <p>
-                따라서 우리는 인공지능이 완벽해지기만을 마냥 기다릴 것이 아니라, <span class="marker">AI가 가진 분명한 한계를 인정하는 방어 안전망</span>을 만들어야 합니다. AI 챗봇이 청소년의 속마음을 편하게 열어주는 '첫 번째 대화 문턱' 역할을 해준다면, 위험 수위가 기준을 넘는 순간에는 주저 없이 실제 상담 시스템으로 책임감 있게 바톤을 넘겨주어야 합니다. AI의 편리한 접근성과 오프라인의 전문적인 구호 인프라를 매끄럽게 연결하는 안전망을 다지는 것이 지금 우리 사회가 해결해야 할 가장 긴급한 과제입니다.
-            </p>
+        <!-- 🎨 직관적인 핵심 주장 시각화 상자 -->
+        <div class="opinion-visual-container">
+            <div class="opinion-bubble-card">
+                <div class="opinion-bubble-text">컴퓨터 코드로 움직이는 AI는 인간의 차가운 우울과 절망을 완벽히 이해할 수 없다.</div>
+            </div>
+            <div class="opinion-bubble-card">
+                <div class="opinion-bubble-text">기계적인 조언은 오히려 전문가 치료 기회를 가로막고 아이를 가상 세계에 고립시킬 뿐이다.</div>
+            </div>
+            <div class="opinion-bubble-card">
+                <div class="opinion-bubble-text">AI를 첫 문턱으로 삼되, 위험 시 오프라인 인간 상담망으로 즉시 바톤을 넘기는 안전망이 시급하다.</div>
+            </div>
         </div>
+
+        <details class="more-info-root" style="text-align: center; margin-top: 30px;">
+            <summary class="more-info-summary" style="background: #dd6b20; color: white; border: none;">💬 나의 생각 전체 줄글 읽어보기</summary>
+            <div class="more-info-details" style="background: #fffaf0; border-left: 6px solid #dd6b20;">
+                <p style="margin-bottom: 15px;">
+                    우리는 흔히 AI가 더 똑똑해지고 사람처럼 자연스럽게 대화할 수 있게 되면 청소년들의 외로움을 달래줄 좋은 친구나 완벽한 상담사가 될 수 있을 거라고 기대합니다. 하지만 저는 아무리 뛰어난 기술이라 하더라도, 사람의 생명과 마음 건강이 걸린 절체절명의 위기 상황까지 AI가 온전히 책임질 수는 없다고 생각합니다. 컴퓨터 코드로 움직이는 챗봇은 문맥상 가장 그럴싸한 단어 조합을 계산해서 보여줄 뿐, 우리가 느끼는 깊은 절망이나 말문 뒤에 숨겨진 차가운 우울의 마음을 결코 가슴으로 이해할 수 없기 때문입니다.
+                </p>
+                <p style="margin-bottom: 15px;">
+                    만약 진짜 심각한 위기에 처한 학생이 챗봇에게 마지막 구조 신호(SOS)를 보냈을 때, 기술이 그저 기계적인 응원 한마디나 "산책을 해보라"는 평범한 조언만 늘어놓는다면 그건 진정한 위로가 아닙니다. 오히려 전문가를 만나 제대로 치료받을 기회를 가로막고, 화면 속 가상 세계로 아이를 더 고립시켜 방치하는 결과를 낳을 수 있습니다. 결국 기술이 채우지 못하는 차가운 빈틈을 메우고 아이들의 다친 상처를 따뜻하게 안아줄 수 있는 존재는 실제 온기를 가진 인간 전문가뿐입니다.
+                </p>
+                <p>
+                    따라서 우리는 인공지능이 완벽해지기만을 마냥 기다릴 것이 아니라, AI가 가진 분명한 한계를 인정하는 방어 안전망을 만들어야 합니다. AI 챗봇이 청소년의 속마음을 편하게 열어주는 '첫 번째 대화 문턱' 역할을 해준다면, 위험 수위가 기준을 넘는 순간에는 주저 없이 실제 상담 시스템으로 책임감 있게 바톤을 넘겨주어야 합니다. AI의 편리한 접근성과 오프라인의 전문적인 구호 인프라를 매끄럽게 연결하는 안전망을 다지는 것이 지금 우리 사회가 해결해야 할 가장 긴급한 과제입니다.
+                </p>
+            </div>
+        </details>
     </section>
 
+    <!-- 5. 최종 제안 구역 (화살표 흐름도 도식화 및 대화형 시뮬레이션 유지) -->
     <section id="proposal">
         <h2 class="section-title">💡 최종 제안: 인간 상담 연결 체계 구조</h2>
-        <p class="section-subtitle">웹페이지의 장점을 살려, AI 대화에서 시작된 위기 감지가 어떻게 실제 전문가 상담으로 안전하게 이어지는지 그림과 도식으로 보여드립니다.</p>
+        <p class="section-subtitle">AI 대화에서 시작된 위기 감지가 어떻게 인간 전문가 상담으로 이어지는지 시각적 흐름으로 확인하세요.</p>
         
+        <!-- 🎨 단계별 화살표 흐름도 (Flowchart) 디자인 -->
         <div class="flow-layout">
             <div class="flow-card">
                 <div class="flow-icon">1</div>
                 <div class="flow-text">
                     <h4>🚨 위기 징후 실시간 자동 감지</h4>
-                    <p>청소년이 AI와 일상적인 이야기를 나누는 중이더라도 자해를 암시하는 말, 극단적인 선택 언급, 지속적인 절망감 표현 등 위험 수위가 높은 특정 단어나 문맥을 알고리즘이 포착하면 시스템은 즉시 일반 대화 모드를 중단하고 안전 보호 단계를 작동시킵니다.</p>
+                    <p>자해 암시어, 극단적 선택 언급 등 위험 수위가 높은 문맥 포착 시 즉시 일반 대화 모드 차단.</p>
                 </div>
             </div>
             
@@ -281,8 +340,9 @@
                 <div class="flow-icon">2</div>
                 <div class="flow-text">
                     <h4>📝 동의 기반 '위기 대화 요약 카드' 자동 생성</h4>
-                    <p>화면에 전문 상담원과 연결해도 괜찮은지 정중하게 물어보는 안내창을 띄워 청소년의 동의를 구합니다. 동의를 받으면 사생활 보호를 위해 일상적인 수다는 제외하고, 위기를 유발한 핵심 스트레스 원인과 현재의 위험 상황만을 깔끔하게 정리한 '위기 대화 요약 카드'를 시스템이 자동으로 만들어 냅니다.</p>
+                    <p>학생 동의 하에 사생활 침해 없는 핵심 스트레스 원인 중심의 요약 프로필 카드 자동 빌드.</p>
                     
+                    <!-- [시각화 UI] 위기 대화 요약 카드 예시 -->
                     <div class="summary-card-visual">
                         <div class="summary-card-header">
                             <span>📋 동의 기반 위기 대화 요약 카드 (예시)</span>
@@ -301,18 +361,21 @@
                 <div class="flow-icon">3</div>
                 <div class="flow-text">
                     <h4>🤝 인간 전문 상담 시스템 실시간 연결 및 구호</h4>
-                    <p>자동으로 만들어진 요약 카드는 청소년 전문 공공 상담 기관(1388 등)이나 학교 안의 위(Wee) 클래스 상담 선생님의 화면으로 실시간 전송됩니다. 실제 인간 상담사는 아이가 AI 앞에서 어떤 아픔을 호소했는지 핵심 맥락을 미리 파악한 상태에서 상담을 시작하므로, 고통스러운 기억을 처음부터 다시 캐묻는 상처를 주지 않고 신속하게 직접적인 대면 도움과 구호를 전개할 수 있습니다.</p>
+                    <p>요약 카드가 위(Wee) 클래스나 공공 상담 센터(1388)로 즉각 전송되어 중복 질문 없이 신속한 구호 전개.</p>
                 </div>
             </div>
         </div>
 
+        <!-- 플레이 시뮬레이션 화면 구역 (체험형 시각 요소) -->
         <div class="sim-container">
             <h3 style="margin-bottom: 10px; color: #1a202c; font-weight: 800;">🎮 플레이 시뮬레이션: 내가 제안한 시스템 작동해보기</h3>
             <p style="font-size: 0.95rem; color: #4a5568; margin-bottom: 20px;">아래 버튼을 눌러 AI 상담 챗봇이 위기 상황에 어떻게 안전하게 대처하고 인간 상담사에게 연결하는지 직접 확인해 보세요.</p>
             
             <div class="sim-screen" id="simScreen">
+                <!-- 시작 버튼 -->
                 <button class="sim-btn" id="startBtn" onclick="runSimulation(1)">🎮 시스템 시뮬레이션 가동하기</button>
 
+                <!-- 단계 1 -->
                 <div class="sim-box" id="simStep1">
                     <div class="sim-step-title"><span>[단계 1]</span> 🚨 위험 문맥 실시간 감지 작동</div>
                     <div style="background: #fff5f5; border: 1px solid #feb2b2; padding: 15px; border-radius: 8px; font-size: 0.95rem;">
@@ -322,6 +385,7 @@
                     <button class="next-sim-btn" onclick="runSimulation(2)">다음 단계 진행 ➔</button>
                 </div>
 
+                <!-- 단계 2 -->
                 <div class="sim-box" id="simStep2">
                     <div class="sim-step-title"><span>[단계 2]</span> 📝 학생 동의 및 '위기 대화 요약 카드' 자동 완성</div>
                     <div style="background: #ebf8ff; border: 1px solid #bee3f8; padding: 15px; border-radius: 8px; font-size: 0.95rem; margin-bottom: 15px;">
@@ -341,6 +405,7 @@
                     <button class="next-sim-btn" onclick="runSimulation(3)">전문가에게 링크 전송하기 ➔</button>
                 </div>
 
+                <!-- 단계 3 -->
                 <div class="sim-box" id="simStep3">
                     <div class="sim-step-title"><span>[단계 3]</span> 🤝 인간 전문 상담실 실시간 화면 전송 및 구호 연계</div>
                     <div style="background: #f0fff4; border: 1px solid #9ae6b4; padding: 15px; border-radius: 8px; font-size: 0.95rem;">
@@ -353,13 +418,14 @@
         </div>
     </section>
 
+    <!-- 6. 하단 영역 -->
     <footer>
         감사합니다.
     </footer>
 
+    <!-- 시뮬레이션 제어 스크립트 -->
     <script>
         function runSimulation(step) {
-            // 모든 시뮬레이션 박스 숨기기
             document.getElementById('startBtn').style.display = 'none';
             document.getElementById('simStep1').style.display = 'none';
             document.getElementById('simStep2').style.display = 'none';
@@ -372,7 +438,6 @@
             } else if (step === 3) {
                 document.getElementById('simStep3').style.display = 'block';
             } else {
-                // 초기화
                 document.getElementById('startBtn').style.display = 'block';
             }
         }
